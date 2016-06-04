@@ -1,0 +1,19 @@
+{
+  "name": "backbone-modal",
+  "authors": [
+    "Pavel Karpovich <mr.jakebluess@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
