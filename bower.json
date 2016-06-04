@@ -1,0 +1,28 @@
+{
+  "name": "backbone-modal",
+  "authors": [
+    "Pavel Karpovich <mr.jakebluess@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "underscore": "^1.8.3",
+    "requirejs": "^2.2.0",
+    "jquery": "^2.2.4"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
