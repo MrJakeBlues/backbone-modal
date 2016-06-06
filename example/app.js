@@ -19,9 +19,10 @@ define([
             return this;
         },
         showModal: function() {
-            var modal = new Modal();
-            this.$el.append(modal.render().el);
-            modal.show();
+            var modal = new Modal({
+                title: 'Title',
+                body: 'Body text'
+            });
         }
     });
 });

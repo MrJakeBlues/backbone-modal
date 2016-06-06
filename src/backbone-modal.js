@@ -10,17 +10,63 @@
     'use strict';
 
     Backbone.Modal = Backbone.View.extend({
-        template: _.template('<div class="modal fade" tabindex="-1" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title">Modal title</h4> </div> <div class="modal-body"> <p>One fine body&hellip;</p> </div> <div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div> </div><!-- /.modal-content --> </div><!-- /.modal-dialog --> </div><!-- /.modal -->'),
+        events: {
+            'shown.bs.modal': 'shown',
+            'hidden.bs.modal': 'destroy',
+            'click #close': 'close',
+            'click #confirm': 'confirm'
+        },
+        attributes: {
+            'class': 'modal fade',
+            id: ''
+        },
+        template: _.template('<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+            '<% if (title) { %>' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title"><%= title %></h4>' +
+            '</div>' +
+            '<% } %>' +
+            '<% if (body) { %>' +
+            '<div class="modal-body">' +
+            '<p><%= body %></p>' +
+            '</div>' +
+            '<% } %>' +
+            '<div class="modal-footer">' +
+            '<button type="button" id="close" class="btn btn-default">Close</button>' +
+            '<button type="button" id="confirm" class="btn btn-primary">Save changes</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>'),
         initialize: function(options) {
+            this.attributes = _.pick(options, _.keys(this.attributes));
+            this.options = _.omit(options, _.keys(this.attributes));
             this.render();
         },
         render: function() {
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                title: this.options.title,
+                body: this.options.body
+            })).attr(this.attributes);
+            this.$el.modal(this.options);
 
             return this;
         },
-        show: function() {
-            this.$('.modal').modal('show');
+        shown: function() {
+
+        },
+        hidden: function() {
+
+        },
+        destroy: function() {
+            this.remove();
+        },
+        close: function() {
+            this.$el.modal('hide');
+        },
+        confirm: function() {
+            this.$el.modal('hide');
         }
     });
 
