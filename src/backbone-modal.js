@@ -30,7 +30,7 @@
             '<% } %>' +
             '<% if (body) { %>' +
             '<div class="modal-body">' +
-            '<p><%= body %></p>' +
+            '<%= body %>' +
             '</div>' +
             '<% } %>' +
             '<div class="modal-footer">' +
@@ -42,6 +42,10 @@
         initialize: function(options) {
             this.attributes = _.pick(options, _.keys(this.attributes));
             this.options = _.omit(options, _.keys(this.attributes));
+
+            if (options.body && options.body.$el) {
+                this.options.body = options.body.render().$el[0].outerHTML;
+            }
             this.render();
         },
         render: function() {
