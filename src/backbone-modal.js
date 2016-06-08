@@ -20,6 +20,14 @@
             'class': 'modal fade',
             id: ''
         },
+        defaults: {
+            title: '',
+            body: '',
+            footer: '',
+            closeIcon: true,
+            backdrop: true,
+            keyboard: true
+        },
         template: _.template('<div class="modal-dialog">' +
             '<div class="modal-content">' +
             '<% if (title) { %>' +
@@ -33,32 +41,37 @@
             '<%= body %>' +
             '</div>' +
             '<% } %>' +
+            '<% if (footer) { %>' +
             '<div class="modal-footer">' +
-            '<button type="button" id="close" class="btn btn-default">Close</button>' +
-            '<button type="button" id="confirm" class="btn btn-primary">Save changes</button>' +
+            '<%= footer %>' +
             '</div>' +
+            '<% } %>' +
             '</div>' +
             '</div>'),
         initialize: function(options) {
             this.attributes = _.pick(options, _.keys(this.attributes));
-            this.options = _.omit(options, _.keys(this.attributes));
+            this.options = _.extend(this.defaults, options);
 
             if (options.body && options.body.$el) {
                 this.options.body = options.body.render().$el[0].outerHTML;
             }
-            this.render();
         },
         render: function() {
             this.$el.html(this.template({
                 title: this.options.title,
-                body: this.options.body
+                body: this.options.body,
+                footer: this.options.footer
             })).attr(this.attributes);
+
             this.$el.modal(this.options);
 
             return this;
         },
         shown: function() {
 
+        },
+        show: function() {
+            this.render();
         },
         hidden: function() {
 
