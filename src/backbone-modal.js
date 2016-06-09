@@ -17,8 +17,7 @@
             'click #confirm': 'confirm'
         },
         attributes: {
-            'class': 'modal fade',
-            id: ''
+            'class': 'modal'
         },
         defaults: {
             title: '',
@@ -26,7 +25,9 @@
             footer: '',
             closeIcon: true,
             backdrop: true,
-            keyboard: true
+            keyboard: true,
+            animation: true,
+            className: ''
         },
         template: _.template('<div class="modal-dialog">' +
             '<div class="modal-content">' +
@@ -49,8 +50,15 @@
             '</div>' +
             '</div>'),
         initialize: function(options) {
-            this.attributes = _.pick(options, _.keys(this.attributes));
             this.options = _.extend(this.defaults, options);
+
+            if (this.options.className) {
+                this.attributes.class += ' ' + options.className;
+            }
+
+            if (this.options.animation) {
+                this.attributes.class += ' fade';
+            }
 
             if (options.body && options.body.$el) {
                 this.options.body = options.body.render().$el[0].outerHTML;
