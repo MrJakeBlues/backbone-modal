@@ -25,24 +25,7 @@ define([
             var modal = new Modal({
                 title: 'Simple modal',
                 body: '<h4>This is simple modal.</h4><p>You can use simple text or template to show body.</p>',
-                buttons: [
-                    {
-                        style: 'primary',
-                        className: 'test',
-                        text: 'Primary'
-                    },
-                    {
-                        className: 'test',
-                        text: 'Primary'
-                    },
-                    {
-                        style: 'primary',
-                        text: 'Primary'
-                    },
-                    {
-                        text: 'Primary'
-                    }
-                ],
+                buttons: [],
                 class: 'test'
             });
             modal.show();
